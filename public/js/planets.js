@@ -35,8 +35,11 @@ function createAsteroidBelt(scene) {
 }
 
 function createPlanets(scene) {
+    // Correct base path for textures
+    const basePath = import.meta.env.BASE_URL;
+
     // Sun
-    const sunTexture = textureLoader.load('textures/2k_sun.jpg');
+    const sunTexture = textureLoader.load(`${basePath}textures/2k_sun.jpg`);
     const sunGeometry = new THREE.SphereGeometry(15, 32, 32);
     const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture });
     sun = new THREE.Mesh(sunGeometry, sunMaterial);
@@ -55,7 +58,7 @@ function createPlanets(scene) {
 
     // Planets
     planetData.forEach(data => {
-        const planetTexture = textureLoader.load(data.texture);
+        const planetTexture = textureLoader.load(`${basePath}${data.texture}`);
         const planetGeometry = new THREE.SphereGeometry(data.radius, 32, 32);
         const planetMaterial = new THREE.MeshStandardMaterial({ map: planetTexture });
         const planet = new THREE.Mesh(planetGeometry, planetMaterial);
@@ -75,7 +78,7 @@ function createPlanets(scene) {
 
         // Add rings to Saturn
         if (data.name === 'Saturn') {
-            const ringTexture = textureLoader.load(data.ringTexture);
+            const ringTexture = textureLoader.load(`${basePath}${data.ringTexture}`);
             const ringGeometry = new THREE.RingGeometry(data.radius + 2, data.radius + 6, 32);
             const ringMaterial = new THREE.MeshStandardMaterial({ map: ringTexture, side: THREE.DoubleSide, transparent: true });
             const ring = new THREE.Mesh(ringGeometry, ringMaterial);

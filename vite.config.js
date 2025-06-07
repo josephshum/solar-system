@@ -2,8 +2,11 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   base: '/solar-system/',
-  root: 'public',
   build: {
-    outDir: '../dist',
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: 'public/index.html'
+    }
   },
 }) 
